@@ -50,3 +50,5 @@ temp/
 # Scripts and Documentation
 *.sh
 *.md
+.vercel
+.env*.local
