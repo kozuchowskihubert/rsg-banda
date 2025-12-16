@@ -46,3 +46,7 @@ npm-debug.log*
 tmp/
 temp/
 *.tmp
+
+# Scripts and Documentation
+*.sh
+*.md
