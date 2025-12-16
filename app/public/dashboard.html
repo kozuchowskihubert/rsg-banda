@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - RSG Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rsg-navy: #0A1628;
+            --rsg-navy-light: #1a2942;
+            --rsg-navy-dark: #050B14;
+            --rsg-green: #39FF14;
+            --rsg-green-dark: #2BCC10;
+            --rsg-green-glow: rgba(57, 255, 20, 0.3);
+            --rsg-purple: #9D4EDD;
+            --rsg-red: #FF006E;
+            --rsg-gold: #FFD700;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(180deg, var(--rsg-navy-dark) 0%, var(--rsg-navy) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: rgba(5, 11, 20, 0.95);
+            border-right: 2px solid var(--rsg-green);
+            padding: 30px 20px;
+        }
+
+        .sidebar-logo {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: var(--rsg-green);
+            margin-bottom: 50px;
+            text-align: center;
+            text-shadow: 0 0 20px var(--rsg-green-glow);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            font-family: 'Barlow Condensed', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(57, 255, 20, 0.1);
+            color: var(--rsg-green);
+        }
+
+        .sidebar-menu i {
+            font-size: 1.2rem;
+            width: 20px;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--rsg-green);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            text-shadow: 0 0 25px var(--rsg-green-glow);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--rsg-green), var(--rsg-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: rgba(26, 41, 66, 0.6);
+            border: 2px solid rgba(57, 255, 20, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--rsg-green);
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            color: var(--rsg-green);
+            margin-bottom: 15px;
+        }
+
+        .stat-value {
+            font-family: 'Teko', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--rsg-green);
+            margin-bottom: 5px;
+            text-shadow: 0 0 20px var(--rsg-green-glow);
+        }
+
+        .stat-label {
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        /* Content Section */
+        .section {
+            background: rgba(26, 41, 66, 0.4);
+            border: 2px solid rgba(57, 255, 20, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--rsg-green);
+        }
+
+        .btn {
+            padding: 10px 25px;
+            background: var(--rsg-green);
+            color: var(--rsg-navy-dark);
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--rsg-green-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Content List */
+        .content-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .content-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(10, 22, 40, 0.5);
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .content-item:hover {
+            background: rgba(57, 255, 20, 0.05);
+        }
+
+        .content-cover {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--rsg-purple), var(--rsg-red));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .content-info {
+            flex: 1;
+        }
+
+        .content-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .content-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .content-stats {
+            display: flex;
+            gap: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Activity Feed */
+        .activity-item {
+            padding: 15px;
+            border-left: 3px solid var(--rsg-green);
+            margin-bottom: 15px;
+            background: rgba(10, 22, 40, 0.3);
+            border-radius: 5px;
+        }
+
+        .activity-time {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">🎤 RSG</div>
+            <ul class="sidebar-menu">
+                <li><a href="/dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="/beats.html"><i class="fas fa-music"></i> My Beats</a></li>
+                <li><a href="/upload.html"><i class="fas fa-upload"></i> Upload</a></li>
+                <li><a href="/community.html"><i class="fas fa-users"></i> Community</a></li>
+                <li><a href="/api-keys.html"><i class="fas fa-key"></i> API Keys</a></li>
+                <li><a href="/analytics.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                <li><a href="/settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="/" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header-section">
+                <h1 class="page-title">Dashboard</h1>
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div id="username">Loading...</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Artist</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-music"></i></div>
+                    <div class="stat-value" id="total-beats">0</div>
+                    <div class="stat-label">Total Beats</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-play"></i></div>
+                    <div class="stat-value" id="total-plays">0</div>
+                    <div class="stat-label">Total Plays</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-heart"></i></div>
+                    <div class="stat-value" id="total-likes">0</div>
+                    <div class="stat-label">Total Likes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-download"></i></div>
+                    <div class="stat-value" id="total-downloads">0</div>
+                    <div class="stat-label">Downloads</div>
+                </div>
+            </div>
+
+            <!-- Recent Beats -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Beats</h2>
+                    <a href="/upload.html" class="btn">Upload New Beat</a>
+                </div>
+                <div class="content-list" id="recent-beats">
+                    <p style="color: var(--text-secondary);">No beats uploaded yet.</p>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Activity</h2>
+                </div>
+                <div id="activity-feed">
+                    <div class="activity-item">
+                        <div class="activity-time">2 hours ago</div>
+                        <div>Your beat "Dark Trap" received 25 new plays</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-time">5 hours ago</div>
+                        <div>New follower: @producer_mike</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-time">1 day ago</div>
+                        <div>Your beat "Street Dreams" was downloaded 10 times</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Load user data
+        async function loadUserData() {
+            try {
+                const response = await fetch('/api/auth/me');
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('username').textContent = data.data.display_name || data.data.username;
+                } else {
+                    window.location.href = '/login.html';
+                }
+            } catch (error) {
+                console.error('Error loading user:', error);
+                window.location.href = '/login.html';
+            }
+        }
+
+        // Load beats
+        async function loadBeats() {
+            try {
+                const userResponse = await fetch('/api/auth/me');
+                const userData = await userResponse.json();
+                
+                if (!userData.success) return;
+
+                const response = await fetch(`/api/beats?user_id=${userData.data.id}&limit=5`);
+                const data = await response.json();
+                
+                if (data.success && data.data.length > 0) {
+                    const container = document.getElementById('recent-beats');
+                    container.innerHTML = data.data.map(beat => `
+                        <div class="content-item">
+                            <div class="content-cover"><i class="fas fa-music"></i></div>
+                            <div class="content-info">
+                                <div class="content-title">${beat.title}</div>
+                                <div class="content-meta">${beat.genre || 'Uncategorized'} • ${beat.bpm ? beat.bpm + ' BPM' : ''}</div>
+                            </div>
+                            <div class="content-stats">
+                                <span><i class="fas fa-play"></i> ${beat.plays || 0}</span>
+                                <span><i class="fas fa-heart"></i> ${beat.likes || 0}</span>
+                                <span><i class="fas fa-download"></i> ${beat.downloads || 0}</span>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    // Update stats
+                    document.getElementById('total-beats').textContent = data.count;
+                    const totalPlays = data.data.reduce((sum, beat) => sum + (beat.plays || 0), 0);
+                    const totalLikes = data.data.reduce((sum, beat) => sum + (beat.likes || 0), 0);
+                    const totalDownloads = data.data.reduce((sum, beat) => sum + (beat.downloads || 0), 0);
+                    
+                    document.getElementById('total-plays').textContent = totalPlays;
+                    document.getElementById('total-likes').textContent = totalLikes;
+                    document.getElementById('total-downloads').textContent = totalDownloads;
+                }
+            } catch (error) {
+                console.error('Error loading beats:', error);
+            }
+        }
+
+        function logout() {
+            fetch('/api/auth/logout', { method: 'POST' })
+                .then(() => window.location.href = '/')
+                .catch(err => console.error('Logout error:', err));
+        }
+
+        // Initialize
+        loadUserData();
+        loadBeats();
+    </script>
+</body>
+</html>

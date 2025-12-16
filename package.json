@@ -1,0 +1,28 @@
+{
+  "name": "rsg-platform",
+  "version": "1.0.0",
+  "description": "RSG Platform - Hip-hop, Rappers, Streetwear & Underground Culture Hub",
+  "main": "app/server.js",
+  "scripts": {
+    "start": "node app/server.js",
+    "dev": "nodemon app/server.js",
+    "test": "cd app && npm test",
+    "lint": "cd app && npm run lint",
+    "lint:fix": "cd app && npm run lint:fix",
+    "migrate": "node app/utils/db-init.js"
+  },
+  "keywords": [
+    "hip-hop",
+    "rappers",
+    "streetwear",
+    "underground",
+    "rsg",
+    "trap",
+    "beats"
+  ],
+  "author": "RSG Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

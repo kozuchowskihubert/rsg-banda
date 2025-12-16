@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Obrazów - RSG</title>
+    <style>
+        body {
+            background: #0A1628;
+            color: #39FF14;
+            font-family: Arial, sans-serif;
+            padding: 40px;
+        }
+        .test-section {
+            margin: 40px 0;
+            border: 2px solid #39FF14;
+            padding: 20px;
+        }
+        h2 {
+            color: #39FF14;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #39FF14;
+        }
+        .bg-test {
+            width: 500px;
+            height: 300px;
+            border: 2px solid #39FF14;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 TEST OBRAZÓW RSG PLATFORM</h1>
+    
+    <div class="test-section">
+        <h2>1. Logo (jako IMG tag)</h2>
+        <img src="/images/logo.png" alt="Logo" style="height: 100px;">
+        <p>Ścieżka: /images/logo.png</p>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Image.png (jako IMG tag)</h2>
+        <img src="/images/image.png" alt="Image" style="height: 200px;">
+        <p>Ścieżka: /images/image.png</p>
+    </div>
+
+    <div class="test-section">
+        <h2>3. 60.png (jako IMG tag)</h2>
+        <img src="/images/60.png" alt="60" style="height: 200px;">
+        <p>Ścieżka: /images/60.png</p>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Logo (jako CSS background)</h2>
+        <div class="bg-test" style="background: url('/images/logo.png') center/contain no-repeat;"></div>
+        <p>CSS: background: url('/images/logo.png')</p>
+    </div>
+
+    <div class="test-section">
+        <h2>5. Image.png (jako CSS background)</h2>
+        <div class="bg-test" style="background: url('/images/image.png') center/cover no-repeat;"></div>
+        <p>CSS: background: url('/images/image.png')</p>
+    </div>
+
+    <div class="test-section">
+        <h2>6. 60.png (jako CSS background)</h2>
+        <div class="bg-test" style="background: url('/images/60.png') center/cover no-repeat;"></div>
+        <p>CSS: background: url('/images/60.png')</p>
+    </div>
+
+    <div class="test-section">
+        <h2>7. Photo JPG (jako IMG tag)</h2>
+        <img src="/images/photo-2025-12-13.jpg" alt="Photo" style="height: 200px;">
+        <p>Ścieżka: /images/photo-2025-12-13.jpg</p>
+    </div>
+
+    <div class="test-section">
+        <h2>8. Photo JPG (jako CSS background)</h2>
+        <div class="bg-test" style="background: url('/images/photo-2025-12-13.jpg') center/cover no-repeat;"></div>
+        <p>CSS: background: url('/images/photo-2025-12-13.jpg')</p>
+    </div>
+
+    <script>
+        console.log('🔍 Test obrazów - sprawdź Network tab w DevTools');
+        console.log('📍 Ścieżki obrazów:');
+        console.log('  - /images/logo.png');
+        console.log('  - /images/image.png');
+        console.log('  - /images/60.png');
+    </script>
+</body>
+</html>

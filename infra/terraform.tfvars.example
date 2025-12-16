@@ -1,0 +1,20 @@
+# Example terraform.tfvars file
+# Copy this file to terraform.tfvars and fill in your values
+# DO NOT commit terraform.tfvars to version control!
+
+project_name        = "rsg-platform"
+resource_group_name = "rsg-platform-rg"
+location            = "westus2"
+environment         = "production"
+
+# Database Configuration
+db_admin_username = "rsgadmin"
+db_admin_password = "YourSecurePassword123!"
+database_name     = "rsg_db"
+db_sku_name       = "B_Standard_B1ms"
+
+# App Service Configuration
+app_service_sku = "B1"
+
+# Session Secret (generate a random string)
+session_secret = "your-random-session-secret-change-this"
