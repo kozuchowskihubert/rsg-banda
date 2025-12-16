@@ -3,11 +3,9 @@ const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const session = require('express-session');
-const pgSession = require('connect-pg-simple')(session);
 const path = require('path');
 require('dotenv').config();
 
-const pool = require('./config/database');
 const apiRoutes = require('./routes/index');
 
 const app = express();
@@ -59,22 +57,7 @@ const sessionConfig = {
   },
 };
 
-// Use PostgreSQL for session storage in production
-if (process.env.NODE_ENV === 'production' && process.env.DATABASE_URL) {
-  sessionConfig.store = new pgSession({
-    pool,
-    tableName: 'session',
-    createTableIfMissing: true,
-  });
-}
-
 app.use(session(sessionConfig));
-
-// ============================================================================
-// Database Connection
-// ============================================================================
-
-app.locals.db = pool;
 
 // ============================================================================
 // Static Files
@@ -112,34 +95,13 @@ app.get('/health', async (req, res) => {
   const response = {
     status: 'healthy',
     timestamp: new Date().toISOString(),
-    app: 'RSG Platform',
+    app: 'RSG BANDA',
     uptime: process.uptime(),
     memory: process.memoryUsage(),
+    database: 'not-configured',
   };
 
-  try {
-    const client = await Promise.race([
-      pool.connect(),
-      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 2000)),
-    ]);
-
-    if (client) {
-      try {
-        await client.query('SELECT 1');
-        response.database = 'connected';
-      } catch (dbErr) {
-        response.database = 'error';
-        response.db_error = dbErr.message;
-      } finally {
-        client.release();
-      }
-    }
-  } catch (err) {
-    response.database = 'unavailable';
-  }
-
-  const statusCode = response.database === 'connected' ? 200 : 503;
-  res.status(statusCode).json(response);
+  res.status(200).json(response);
 });
 
 // ============================================================================
